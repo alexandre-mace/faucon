@@ -9,14 +9,17 @@ Array.prototype.random = function () {
 function App() {
   const [count, setCount] = useState(0);
   const [definitions, setDefinitions] = useState([]);
-  const [currentDefinition, setCurrentDefinition] = useState([]);
+  const [currentDefinition, setCurrentDefinition] = useState(null);
 
     useEffect(() => {
         setDefinitions(data);
     }, []);
 
     useEffect(() => {
-        setCurrentDefinition(definitions.random())
+        const potentialNewDefinitions = (currentDefinition === null || typeof currentDefinition === "undefined")
+            ? definitions
+            : definitions.filter(definition => definition.title !== currentDefinition.title)
+        setCurrentDefinition(potentialNewDefinitions.random())
     }, [count, definitions]);
 
   return (
