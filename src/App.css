@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+body {
+    padding: 2rem 10rem 5rem 10rem;
+    font-family: 'Frank Ruhl Libre', serif;
+    color: #3D3E3E;
+    font-weight: 400;
+    background-color: #F7E495;
+}
+header {
+    position: relative;
+}
+.count {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    font-size: 1.8rem;
+}
+.count span {
+    font-weight: 900;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+#maintitle {
+    font-size: 8rem;
+    color: #699E95;
+    font-weight: 900;
+}
+#subtitle {
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-top: 0;
+    font-family: 'Frank Ruhl Libre', serif;
+}
+main {
+    padding: 3rem 22rem 0 22rem;
+}
+.definition-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: 4rem;
+}
+.definition-source {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #3D3E3E;
+    margin-bottom: 1.5rem;
+}
+.definition-content {
+    font-family: 'Rubik', sans-serif;
+    line-height: 2;
+    font-size: 1.3rem;
+}
+.action-button {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    background-color: #699E95;
+    color: #F7E495;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    margin: 3rem auto auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.action-button:active, .action-button:focus {
+    outline: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.action-button:hover {
+    cursor: pointer;
 }
