@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/faucon/static/css/main.78f6bb22.chunk.css",
+    "main.js": "/faucon/static/js/main.b56033d4.chunk.js",
+    "main.js.map": "/faucon/static/js/main.b56033d4.chunk.js.map",
+    "runtime-main.js": "/faucon/static/js/runtime-main.2d1ec1d5.js",
+    "runtime-main.js.map": "/faucon/static/js/runtime-main.2d1ec1d5.js.map",
+    "static/js/2.c3cf88f1.chunk.js": "/faucon/static/js/2.c3cf88f1.chunk.js",
+    "static/js/2.c3cf88f1.chunk.js.map": "/faucon/static/js/2.c3cf88f1.chunk.js.map",
+    "static/js/3.eafcae77.chunk.js": "/faucon/static/js/3.eafcae77.chunk.js",
+    "static/js/3.eafcae77.chunk.js.map": "/faucon/static/js/3.eafcae77.chunk.js.map",
+    "index.html": "/faucon/index.html",
+    "static/css/main.78f6bb22.chunk.css.map": "/faucon/static/css/main.78f6bb22.chunk.css.map",
+    "static/js/2.c3cf88f1.chunk.js.LICENSE.txt": "/faucon/static/js/2.c3cf88f1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2d1ec1d5.js",
+    "static/js/2.c3cf88f1.chunk.js",
+    "static/css/main.78f6bb22.chunk.css",
+    "static/js/main.b56033d4.chunk.js"
+  ]
+}
