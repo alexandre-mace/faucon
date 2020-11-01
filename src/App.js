@@ -18,7 +18,7 @@ function App() {
             ? definitions
             : definitions.filter(definition => definition !== currentDefinition.title)
 
-        setCurrentDefinition(getDefinition(potentialNewDefinitions.random(), setCurrentDefinition))
+        getDefinition('Surcharge informationnelle', setCurrentDefinition)
     }, [count, definitions]);
 
     return (

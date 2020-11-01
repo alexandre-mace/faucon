@@ -16,6 +16,7 @@ const getWikipediaDefinition = (word, setter) => {
                         description: descriptionParagraphs,
                         relateds: relateds
                     })
+                    return;
                 }
             } else {
                 console.error(request.status, request.statusText);
@@ -29,24 +30,31 @@ const getWikipediaDefinition = (word, setter) => {
 }
 
 const getWikipediaTitle = (request) => {
-    return request.responseXML.querySelectorAll("h1#firstHeading")[0].innerText;
+    return request.responseXML.querySelectorAll("h1")[0].innerText;
 }
 
 const getWikipediaDescription = (request) => {
     const secondTitle = request.responseXML.querySelectorAll("h2:not(#mw-toc-heading)");
     let descriptionParagraphs = [];
-    let potentialParagraph = secondTitle[1].previousSibling.previousSibling;
-
-    if (potentialParagraph !== null) {
-        if (potentialParagraph.tagName === 'DIV') {
-            potentialParagraph = potentialParagraph.previousSibling.previousSibling
+    let potentialParagraph = secondTitle[0];
+    if (potentialParagraph.innerText.includes('de navigation')) {
+        potentialParagraph = secondTitle[1]
+    }
+    let i;
+    for (i = 0; i < 8; i++) {
+        if (potentialParagraph && potentialParagraph.tagName === 'P') {
+            while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
+                descriptionParagraphs.push(potentialParagraph)
+                potentialParagraph = potentialParagraph.previousElementSibling
+            }
+            descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
+            return descriptionParagraphs
         }
-        while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
-            descriptionParagraphs.push(potentialParagraph)
-            potentialParagraph = potentialParagraph.previousSibling
+        if (potentialParagraph.previousElementSibling === null) {
+            potentialParagraph = potentialParagraph.parentNode
+        } else {
+            potentialParagraph = potentialParagraph.previousElementSibling
         }
-        descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
-        return descriptionParagraphs
     }
 
     return descriptionParagraphs
