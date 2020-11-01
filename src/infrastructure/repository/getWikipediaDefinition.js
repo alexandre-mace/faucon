@@ -64,16 +64,16 @@ const getWikipediaDescription = (request) => {
         console.log(potentialParagraph.previousSibling)
         console.log(potentialParagraph.tagName)
         if (mediaQuery1.matches && potentialParagraph.previousElementSibling && potentialParagraph.previousElementSibling.tagName === 'SECTION') {
-            potentialParagraph = potentialParagraph.previousElementSibling.lastChild
+            let mobilePotentialParagraph = potentialParagraph.previousElementSibling.lastChild
             for (i = 0; i < 5; i++) {
-                console.log(potentialParagraph)
-                console.log(potentialParagraph.tagName)
-                if (potentialParagraph && potentialParagraph.tagName === 'P') {
-                    return Array.from(potentialParagraph.parentNode.childNodes)
+                console.log(mobilePotentialParagraph)
+                console.log(mobilePotentialParagraph.tagName)
+                if (mobilePotentialParagraph && mobilePotentialParagraph.tagName === 'P') {
+                    return Array.from(mobilePotentialParagraph.parentNode.childNodes)
                         .filter(node => node.tagName === 'P')
                         .map(node => node.innerText)
                 }
-                potentialParagraph = potentialParagraph.previousElementSibling;
+                mobilePotentialParagraph = mobilePotentialParagraph.previousElementSibling;
             }
         }
         if (potentialParagraph.previousElementSibling === null) {
