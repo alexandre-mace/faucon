@@ -60,6 +60,8 @@ const getWikipediaDescription = (request) => {
             descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
             return descriptionParagraphs
         }
+        console.log(potentialParagraph)
+        console.log(potentialParagraph.tagName)
         if (potentialParagraph && potentialParagraph.tagName === 'SECTION' && mediaQuery1.matches) {
             potentialParagraph = potentialParagraph.lastChild
             while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
