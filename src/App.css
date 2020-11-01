@@ -41,12 +41,20 @@ a:hover {
 }
 main {
     padding: 3rem 22rem 0 22rem;
-    min-height: 30rem;
+}
+.main-min {
+    min-height: 700px;
 }
 .definition-title {
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 900;
     font-size: 4rem;
+}
+.related-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    justify-content: center;
 }
 .definition-related-title {
     font-size: 2.5rem;
@@ -59,6 +67,7 @@ main {
     font-size: 1.3rem;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 900;
+    margin-right: 3rem;
 }
 .definition-related:hover {
     cursor: pointer;

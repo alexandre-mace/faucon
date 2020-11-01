@@ -1,6 +1,7 @@
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 
 const getWikipediaDefinition = (word, setter) => {
+    console.log(word)
     let request = new XMLHttpRequest();
     // eslint-disable-next-line no-useless-concat
     request.open("GET", "https://eerie-alien-18238.herokuapp.com/" + "https://fr.wikipedia.org/wiki/" + word.replaceAll(' ', '_'), true);  // last parameter must be true

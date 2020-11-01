@@ -12,7 +12,9 @@ function App() {
     const [count, setCount] = useState(0);
     const [definitions] = useState(data);
     const [needsNewDefinition, setNeedsNewDefinition] = useState(true);
-    const [needsNewRelatedDefinition, setNeedsNewRelatedDefinition] = useState(false);
+    const [needsNewRelatedDefinition, setNeedsNewRelatedDefinition] = useState({
+        status: false
+    });
     const [currentDefinition, setCurrentDefinition] = useState(null);
 
     useEffect(() => {
@@ -27,9 +29,11 @@ function App() {
     }, [needsNewDefinition, definitions]);
 
     useEffect(() => {
-        if (needsNewRelatedDefinition && currentDefinition) {
-            getDefinition(currentDefinition, setCurrentDefinition)
-            setNeedsNewRelatedDefinition(false)
+        if (needsNewRelatedDefinition.status) {
+            getDefinition(needsNewRelatedDefinition.related, setCurrentDefinition)
+            setNeedsNewRelatedDefinition({
+                status: false
+            })
         }
     }, [needsNewRelatedDefinition, definitions]);
 
@@ -46,40 +50,42 @@ function App() {
                 <div className={"count"}><span>{count}</span> sujets étudiés.</div>
                 <p id="subtitle">S'informer sur la désinformation</p>
             </header>
-            {currentDefinition &&
-            <main>
-                <div>
-                    <div className={"definition-title"}>{currentDefinition.title}</div>
-                    <div className={"definition-source"}>
-                        <a target="_blank" rel="noreferrer"
-                            href={currentDefinition.sourceUrl}>{currentDefinition.sourceName}</a>
-                    </div>
-                    {currentDefinition.description.map((description, index) => (
-                        <div key={index} className={"definition-content"}>
-                            {description}
+            <main className={!currentDefinition ? 'main-min' : "main"}>
+                {currentDefinition &&
+                    <>
+                        <div>
+                            <div className={"definition-title"}>{currentDefinition.title}</div>
+                            <div className={"definition-source"}>
+                                <a target="_blank" rel="noreferrer"
+                                    href={currentDefinition.sourceUrl}>{currentDefinition.sourceName}</a>
+                            </div>
+                            {currentDefinition.description.map((description, index) => (
+                                <div key={index} className={"definition-content"}>
+                                    {description}
+                                </div>
+                            ))}
+                            <div className={"related-wrapper"}>
+                            {currentDefinition.relateds.map((related, index) => (
+                                <div key={index} style={{fontSize: Math.floor(Math.random() * 3.5) + 1 + "rem"  }} className={"definition-related"} onClick={() => {
+                                    setCount(count + 1)
+                                    setNeedsNewRelatedDefinition({
+                                        status: true,
+                                        related: related
+                                    })
+                                }}>
+                                    {related}
+                                </div>
+                            ))}
+                            </div>
                         </div>
-                    ))}
-                    {currentDefinition.relateds.length > 0 &&
-                    <div className={"definition-related-title"}>
-                        Connexes
-                    </div>
-                    }
-                    {currentDefinition.relateds.map((related, index) => (
-                        <div key={index} className={"definition-related"} onClick={() => {
+                        <button className={"action-button"} onClick={() => {
                             setCount(count + 1)
-                            setCurrentDefinition(getDefinition(related, setCurrentDefinition))
-                            setNeedsNewRelatedDefinition(true)
-                        }}>
-                            {related}
-                        </div>
-                    ))}
-                </div>
-                <button className={"action-button"} onClick={() => {
-                    setCount(count + 1)
-                    setNeedsNewDefinition(true)
-                }}>Compris</button>
+                            setNeedsNewDefinition(true)
+                        }}>Compris</button>
+                    </>
+                }
             </main>
-            }
+
         </>
     );
 }
