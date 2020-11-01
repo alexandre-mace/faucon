@@ -44,6 +44,22 @@ main {
     font-weight: 900;
     font-size: 4rem;
 }
+.definition-related-title {
+    font-size: 2.5rem;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.definition-related {
+    font-size: 1.3rem;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+}
+.definition-related:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 .definition-source {
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 500;
@@ -74,4 +90,120 @@ main {
 }
 .action-button:hover {
     cursor: pointer;
+}
+@media screen and (max-width: 1600px) {
+    html {
+        font-size: 14px;
+    }
+    body {
+        padding: 3rem 5rem 2rem 5rem;
+    }
+    main {
+        padding: 6rem 15rem 0 15rem;
+    }
+}
+@media screen and (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+    body {
+        padding: 1rem 2rem 2rem 2rem;
+    }
+    main {
+        padding: 6rem 10rem 0 10rem;
+    }
+    #maintitle {
+        font-size: 6rem;
+        color: #699E95;
+        font-weight: 900;
+    }
+    #subtitle {
+        font-weight: 500;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        margin-top: 0;
+        font-family: 'Frank Ruhl Libre', serif;
+    }
+}
+@media screen and (max-width: 1200px) {
+    body {
+        padding: 1rem 2rem 2rem 2rem;
+    }
+    main {
+        padding: 6rem 10rem 0 10rem;
+    }
+    #maintitle {
+        font-size: 6rem;
+        color: #699E95;
+        font-weight: 900;
+    }
+    #subtitle {
+        font-weight: 500;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        margin-top: 0;
+        font-family: 'Frank Ruhl Libre', serif;
+    }
+}
+@media screen and (max-width: 991px) {
+    body {
+        padding: 1rem 2rem 2rem 2rem;
+    }
+    main {
+        padding: 5rem 5rem 0 5rem;
+    }
+    #maintitle {
+        font-size: 4rem;
+        color: #699E95;
+        font-weight: 900;
+    }
+    #subtitle {
+        font-weight: 500;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        margin-top: 0;
+        font-family: 'Frank Ruhl Libre', serif;
+    }
+    .count {
+        font-size: 1.3rem;
+    }
+    .definition-title {
+        font-size: 3rem;
+    }
+    .definition-source {
+        font-size: 1.3rem;
+    }
+    .definition-content {
+        font-size: 1.2rem;
+    }
+}
+@media screen and (max-width: 640px) {
+    #maintitle {
+        font-size: 3rem;
+        color: #699E95;
+        font-weight: 900;
+    }
+    #subtitle {
+        font-size: 1rem;
+    }
+    .count {
+        font-size: 1.2rem;
+        top: 8rem;
+        right: 50%;
+    }
+    .definition-title {
+        font-size: 2.5rem;
+    }
+    .definition-source {
+        font-size: 1.3rem;
+    }
+    .definition-content {
+        font-size: 1.2rem;
+    }
+    body {
+        padding: 1rem 1.3rem 2rem 1.3rem;
+    }
+    main {
+        padding: 7rem 0 0 0;
+    }
 }
