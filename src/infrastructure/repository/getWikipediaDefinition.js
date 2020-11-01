@@ -59,7 +59,6 @@ const getWikipediaRelated = (request) => {
         var i;
         let loopRelated = relatedSection.parentNode;
         for (i = 0; i < 8; i++) {
-            console.log(loopRelated)
             if (loopRelated && loopRelated.className && loopRelated.className.includes("colonnes")) {
                 if (loopRelated.childNodes[1] && loopRelated.childNodes[1].tagName === 'UL') {
                     return Array.from(loopRelated.childNodes[1].childNodes)
