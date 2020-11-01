@@ -62,8 +62,8 @@ const getWikipediaDescription = (request) => {
         }
         console.log(potentialParagraph)
         console.log(potentialParagraph.tagName)
-        if (potentialParagraph && potentialParagraph.tagName === 'SECTION' && mediaQuery1.matches) {
-            potentialParagraph = potentialParagraph.lastChild
+        if (mediaQuery1.matches && potentialParagraph.previousSibling && potentialParagraph.previousSibling.tagName === 'SECTION') {
+            potentialParagraph = potentialParagraph.previousSibling.lastChild
             for (i = 0; i < 5; i++) {
                 console.log(potentialParagraph)
                 console.log(potentialParagraph.tagName)
