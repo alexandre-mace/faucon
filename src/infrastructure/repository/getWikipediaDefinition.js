@@ -47,6 +47,7 @@ const getWikipediaDescription = (request) => {
     if (potentialParagraph.innerText.includes('de navigation')) {
         potentialParagraph = secondTitle[1]
     }
+    console.log(potentialParagraph)
     let i;
     for (i = 0; i < 8; i++) {
         if (potentialParagraph && potentialParagraph.tagName === 'P') {
