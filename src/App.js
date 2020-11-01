@@ -2,6 +2,7 @@ import './App.css';
 import React, {useEffect, useState} from "react";
 import data from './domain/definitions.json';
 import getDefinition from "./application/query/getDefinition";
+import Typing from "react-typing-animation";
 
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 
@@ -15,11 +16,18 @@ const relatedRatio = mediaQuery1.matches ? 1.3 : 3;
 function App() {
     const [count, setCount] = useState(0);
     const [definitions] = useState(data);
+    const [loading, setLoading] = useState(false);
     const [needsNewDefinition, setNeedsNewDefinition] = useState(true);
     const [needsNewRelatedDefinition, setNeedsNewRelatedDefinition] = useState({
         status: false
     });
     const [currentDefinition, setCurrentDefinition] = useState(null);
+
+    const delayedCloseLoader = () => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 550);
+    }
 
     useEffect(() => {
         if (needsNewDefinition) {
@@ -27,6 +35,8 @@ function App() {
                 ? definitions
                 : definitions.filter(definition => definition !== currentDefinition.title)
 
+            setLoading(true)
+            delayedCloseLoader()
             getDefinition(potentialNewDefinitions.random(), setCurrentDefinition)
             setNeedsNewDefinition(false)
         }
@@ -34,6 +44,8 @@ function App() {
 
     useEffect(() => {
         if (needsNewRelatedDefinition.status) {
+            setLoading(true)
+            delayedCloseLoader()
             getDefinition(needsNewRelatedDefinition.related, setCurrentDefinition)
             setNeedsNewRelatedDefinition({
                 status: false
@@ -55,7 +67,12 @@ function App() {
                 <p id="subtitle">S'informer sur la désinformation</p>
             </header>
             <main className={!currentDefinition ? 'main-min' : "main"}>
-                {currentDefinition &&
+                {(needsNewDefinition || needsNewRelatedDefinition.status || loading) &&
+                    <div className={"loader"}>
+                        <Typing>Faucon</Typing>
+                    </div>
+                }
+                {(currentDefinition && !loading) &&
                     <>
                         <div>
                             <div className={"definition-title"}>{currentDefinition.title}</div>

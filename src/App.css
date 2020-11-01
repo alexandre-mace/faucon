@@ -32,6 +32,13 @@ a:hover {
     color: #699E95;
     font-weight: 900;
 }
+.loader {
+    font-size: 4rem;
+    text-align: center;
+    margin-top: 10rem;
+    color: #699E95;
+    font-weight: 900;
+}
 #subtitle {
     font-weight: 500;
     font-size: 2rem;

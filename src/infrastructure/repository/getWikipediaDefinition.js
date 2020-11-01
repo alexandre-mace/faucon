@@ -1,6 +1,7 @@
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 
 const getWikipediaDefinition = (word, setter) => {
+    console.log(word)
     let request = new XMLHttpRequest();
     // eslint-disable-next-line no-useless-concat
     request.open("GET", "https://eerie-alien-18238.herokuapp.com/" + "https://fr.wikipedia.org/wiki/" + word.replaceAll(' ', '_'), true);  // last parameter must be true
@@ -59,7 +60,7 @@ const getWikipediaDescription = (request) => {
             descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
             return descriptionParagraphs
         }
-        if (mediaQuery1.matches && potentialParagraph.previousElementSibling && potentialParagraph.previousElementSibling.tagName === 'SECTION') {
+        if (potentialParagraph.previousElementSibling && potentialParagraph.previousElementSibling.tagName === 'SECTION') {
             let mobilePotentialParagraph = potentialParagraph.previousElementSibling.lastChild
             for (i = 0; i < 5; i++) {
                 if (mobilePotentialParagraph && mobilePotentialParagraph.tagName === 'P') {
@@ -82,6 +83,7 @@ const getWikipediaDescription = (request) => {
 
 const getWikipediaRelated = (request) => {
     let relatedSection = request.responseXML.querySelector("#Articles_connexes");
+    console.log(relatedSection)
     if (relatedSection !== null) {
         let relateds = [];
         var i;
@@ -101,7 +103,7 @@ const getWikipediaRelated = (request) => {
                     .filter(node => !node.innerText.includes('Portail'))
                     .map(node => node.innerText)
             }
-            if (mediaQuery1.matches && loopRelated.tagName === "SECTION" && Array.from(loopRelated.childNodes).length > 0) {
+            if (loopRelated.tagName === "SECTION" && Array.from(loopRelated.childNodes).length > 0) {
                 if (Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL').length > 0) {
                     return Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
                         .filter(node => node.tagName === 'LI')
@@ -115,7 +117,11 @@ const getWikipediaRelated = (request) => {
                         .map(node => node.innerText)
                 }
             }
-            loopRelated = loopRelated.nextSibling
+            if (loopRelated.nextSibling === null) {
+                loopRelated = loopRelated.parentNode
+            } else {
+                loopRelated = loopRelated.nextSibling
+            }
         }
         return relateds;
     }
