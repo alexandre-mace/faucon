@@ -107,6 +107,14 @@ const getWikipediaRelated = (request) => {
                     .filter(node => !node.innerText.includes('Portail'))
                     .map(node => node.innerText)
             }
+            if (mediaQuery1.matches && loopRelated.tagName === "SECTION") {
+                if (loopRelated.childNodes.filter(node => node.tagName === 'UL').length > 0) {
+                    return Array.from(loopRelated.childNodes.filter(node => node.tagName === 'UL')[0].childNodes)
+                        .filter(node => node.tagName === 'LI')
+                        .filter(node => !node.innerText.includes('Portail'))
+                        .map(node => node.innerText)
+                }
+            }
             loopRelated = loopRelated.nextSibling
         }
         return relateds;
