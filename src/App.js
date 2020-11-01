@@ -3,10 +3,14 @@ import React, {useEffect, useState} from "react";
 import data from './domain/definitions.json';
 import getDefinition from "./application/query/getDefinition";
 
+let mediaQuery1 = window.matchMedia("(max-width: 600px)");
+
 // eslint-disable-next-line no-extend-native
 Array.prototype.random = function () {
     return this[Math.floor((Math.random() * this.length))];
 }
+
+const relatedRatio = mediaQuery1.matches ? 1.3 : 3;
 
 function App() {
     const [count, setCount] = useState(0);
@@ -66,7 +70,7 @@ function App() {
                             ))}
                             <div className={"related-wrapper"}>
                             {currentDefinition.relateds.map((related, index) => (
-                                <div key={index} style={{fontSize: Math.floor(Math.random() * 3.5) + 1 + "rem"  }} className={"definition-related"} onClick={() => {
+                                <div key={index} style={{fontSize: Math.random() * relatedRatio + 1 + "rem"}} className={"definition-related"} onClick={() => {
                                     setCount(count + 1)
                                     setNeedsNewRelatedDefinition({
                                         status: true,
