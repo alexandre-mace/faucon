@@ -60,7 +60,8 @@ main {
 .related-wrapper {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: 4rem;
+    line-height: 3;
     justify-content: center;
 }
 .definition-related-title {
@@ -198,6 +199,12 @@ main {
     }
 }
 @media screen and (max-width: 640px) {
+    .related-wrapper {
+        line-height: 2;
+    }
+    .action-button {
+        margin-top: 0;
+    }
     #maintitle {
         font-size: 4.5rem;
         color: #699E95;

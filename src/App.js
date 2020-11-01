@@ -11,7 +11,8 @@ Array.prototype.random = function () {
     return this[Math.floor((Math.random() * this.length))];
 }
 
-const relatedRatio = mediaQuery1.matches ? 1.3 : 3;
+const relatedRatio = mediaQuery1.matches ? 1 : 1;
+const relatedTranslateRatio = mediaQuery1.matches ? 20 : 50;
 
 function App() {
     const [count, setCount] = useState(0);
@@ -87,7 +88,7 @@ function App() {
                             ))}
                             <div className={"related-wrapper"}>
                             {currentDefinition.relateds.map((related, index) => (
-                                <div key={index} style={{fontSize: Math.random() * relatedRatio + 1 + "rem"}} className={"definition-related"} onClick={() => {
+                                <div key={index} style={{fontSize: Math.random() * relatedRatio + 1 + "rem", transform: "translateY(" + -Math.random() * relatedTranslateRatio + "px)"}} className={"definition-related"} onClick={() => {
                                     setCount(count + 1)
                                     setNeedsNewRelatedDefinition({
                                         status: true,
