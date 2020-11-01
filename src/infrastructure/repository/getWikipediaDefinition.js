@@ -102,7 +102,11 @@ const getWikipediaRelated = (request) => {
                     .filter(node => !node.innerText.includes('Portail'))
                     .map(node => node.innerText)
             }
-            loopRelated = loopRelated.nextSibling
+            if (loopRelated.nextSibling === null) {
+                loopRelated = loopRelated.parentNode
+            } else {
+                loopRelated = loopRelated.nextSibling
+            }
         }
     }
     return [];

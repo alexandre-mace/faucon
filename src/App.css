@@ -179,7 +179,7 @@ main {
 }
 @media screen and (max-width: 640px) {
     #maintitle {
-        font-size: 3rem;
+        font-size: 4.5rem;
         color: #699E95;
         font-weight: 900;
     }
