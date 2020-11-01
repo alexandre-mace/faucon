@@ -1,3 +1,5 @@
+let mediaQuery1 = window.matchMedia("(max-width: 600px)");
+
 const getWikipediaDefinition = (word, setter) => {
     let request = new XMLHttpRequest();
     // eslint-disable-next-line no-useless-concat
@@ -51,6 +53,15 @@ const getWikipediaDescription = (request) => {
     let i;
     for (i = 0; i < 8; i++) {
         if (potentialParagraph && potentialParagraph.tagName === 'P') {
+            while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
+                descriptionParagraphs.push(potentialParagraph)
+                potentialParagraph = potentialParagraph.previousElementSibling
+            }
+            descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
+            return descriptionParagraphs
+        }
+        if (potentialParagraph && potentialParagraph.tagName === 'SECTION' && mediaQuery1.matches) {
+            potentialParagraph = potentialParagraph.lastChild]
             while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
                 descriptionParagraphs.push(potentialParagraph)
                 potentialParagraph = potentialParagraph.previousElementSibling
