@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/faucon/static/css/main.40681ee5.chunk.css",
-    "main.js": "/faucon/static/js/main.3135c075.chunk.js",
-    "main.js.map": "/faucon/static/js/main.3135c075.chunk.js.map",
+    "main.js": "/faucon/static/js/main.e52ddb11.chunk.js",
+    "main.js.map": "/faucon/static/js/main.e52ddb11.chunk.js.map",
     "runtime-main.js": "/faucon/static/js/runtime-main.825bf8bb.js",
     "runtime-main.js.map": "/faucon/static/js/runtime-main.825bf8bb.js.map",
     "static/js/2.eeb7eda0.chunk.js": "/faucon/static/js/2.eeb7eda0.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.825bf8bb.js",
     "static/js/2.eeb7eda0.chunk.js",
     "static/css/main.40681ee5.chunk.css",
-    "static/js/main.3135c075.chunk.js"
+    "static/js/main.e52ddb11.chunk.js"
   ]
 }
