@@ -18,9 +18,7 @@ function App() {
             ? definitions
             : definitions.filter(definition => definition !== currentDefinition.title)
 
-        getDefinition(potentialNewDefinitions.random(), setCurrentDefinition)
-
-        setCurrentDefinition(getDefinition(potentialNewDefinitions.random()))
+        setCurrentDefinition(getDefinition('Redwashing', setCurrentDefinition))
     }, [count, definitions]);
 
     return (

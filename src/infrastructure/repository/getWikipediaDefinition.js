@@ -55,26 +55,26 @@ const getWikipediaDescription = (request) => {
 const getWikipediaRelated = (request) => {
     let relatedSection = request.responseXML.querySelector("#Articles_connexes");
     if (relatedSection !== null) {
-        let relateds = Array.from(relatedSection.parentNode.nextSibling.nextSibling.childNodes)
-            .filter(node => node.tagName === 'LI')
-            .map(node => node.innerText)
-        if (relateds.length === 0) {
-            var i;
-            let loopRelated = relatedSection.parentNode;
-            for (i = 0; i < 5; i++) {
-                if (loopRelated && loopRelated.className && loopRelated.className.includes("colonnes")) {
+        let relateds = [];
+        var i;
+        let loopRelated = relatedSection.parentNode;
+        for (i = 0; i < 8; i++) {
+            console.log(loopRelated)
+            if (loopRelated && loopRelated.className && loopRelated.className.includes("colonnes")) {
+                if (loopRelated.childNodes[1] && loopRelated.childNodes[1].tagName === 'UL') {
                     return Array.from(loopRelated.childNodes[1].childNodes)
                         .filter(node => node.tagName === 'LI')
+                        .filter(node => !node.innerText.includes('Portail'))
                         .map(node => node.innerText)
                 }
-                if (loopRelated && loopRelated.tagName === 'UL') {
-                    return Array.from(loopRelated.childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .map(node => node.innerText)
-                }
-                loopRelated = loopRelated.nextSibling
             }
-
+            if (loopRelated && loopRelated.tagName === 'UL') {
+                return Array.from(loopRelated.childNodes)
+                    .filter(node => node.tagName === 'LI')
+                    .filter(node => !node.innerText.includes('Portail'))
+                    .map(node => node.innerText)
+            }
+            loopRelated = loopRelated.nextSibling
         }
         return relateds;
     }
@@ -85,6 +85,7 @@ const getWikipediaRelated = (request) => {
             if (loopRelated && loopRelated.tagName === 'UL') {
                 return Array.from(loopRelated.childNodes)
                     .filter(node => node.tagName === 'LI')
+                    .filter(node => !node.innerText.includes('Portail'))
                     .map(node => node.innerText)
             }
             loopRelated = loopRelated.nextSibling
