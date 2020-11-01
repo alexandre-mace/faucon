@@ -11,15 +11,31 @@ Array.prototype.random = function () {
 function App() {
     const [count, setCount] = useState(0);
     const [definitions] = useState(data);
+    const [needsNewDefinition, setNeedsNewDefinition] = useState(true);
+    const [needsNewRelatedDefinition, setNeedsNewRelatedDefinition] = useState(false);
     const [currentDefinition, setCurrentDefinition] = useState(null);
 
     useEffect(() => {
-        const potentialNewDefinitions = (currentDefinition === null || typeof currentDefinition === "undefined")
-            ? definitions
-            : definitions.filter(definition => definition !== currentDefinition.title)
+        if (needsNewDefinition) {
+            const potentialNewDefinitions = (currentDefinition === null || typeof currentDefinition === "undefined")
+                ? definitions
+                : definitions.filter(definition => definition !== currentDefinition.title)
 
-        getDefinition(potentialNewDefinitions.random(), setCurrentDefinition)
-    }, [count, definitions]);
+            getDefinition(potentialNewDefinitions.random(), setCurrentDefinition)
+            setNeedsNewDefinition(false)
+        }
+    }, [needsNewDefinition, definitions]);
+
+    useEffect(() => {
+        if (needsNewRelatedDefinition && currentDefinition) {
+            getDefinition(currentDefinition, setCurrentDefinition)
+            setNeedsNewRelatedDefinition(false)
+        }
+    }, [needsNewRelatedDefinition, definitions]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [count]);
 
     return (
         <>
@@ -27,7 +43,7 @@ function App() {
                 <div id="maintitle">
                     Faucon
                 </div>
-                <div className={"count"}><span>{count}</span> désinformations comprises.</div>
+                <div className={"count"}><span>{count}</span> sujets étudiés.</div>
                 <p id="subtitle">S'informer sur la désinformation</p>
             </header>
             {currentDefinition &&
@@ -50,13 +66,18 @@ function App() {
                     }
                     {currentDefinition.relateds.map((related, index) => (
                         <div key={index} className={"definition-related"} onClick={() => {
+                            setCount(count + 1)
                             setCurrentDefinition(getDefinition(related, setCurrentDefinition))
+                            setNeedsNewRelatedDefinition(true)
                         }}>
                             {related}
                         </div>
                     ))}
                 </div>
-                <button className={"action-button"} onClick={() => {setCount(count + 1);}}>Compris</button>
+                <button className={"action-button"} onClick={() => {
+                    setCount(count + 1)
+                    setNeedsNewDefinition(true)
+                }}>Compris</button>
             </main>
             }
         </>
