@@ -109,8 +109,9 @@ const getWikipediaRelated = (request) => {
                         .filter(node => !node.innerText.includes('Portail'))
                         .map(node => node.innerText)
                 }
-                if (Array.from(loopRelated.childNodes).filter(node => node.className.includes("colonnes")).length > 0) {
-                    return Array.from(Array.from(loopRelated.childNodes).filter(node => node.className.includes("colonnes"))[0].firstChild.childNodes)
+                console.log(Array.from(loopRelated.childNodes))
+                if (Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes"))).length > 0) {
+                    return Array.from(Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes"))[0].firstChild.childNodes)
                         .filter(node => node.tagName === 'LI')
                         .filter(node => !node.innerText.includes('Portail'))
                         .map(node => node.innerText)
