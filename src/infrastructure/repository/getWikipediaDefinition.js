@@ -108,8 +108,14 @@ const getWikipediaRelated = (request) => {
                     .map(node => node.innerText)
             }
             if (mediaQuery1.matches && loopRelated.tagName === "SECTION") {
-                if (loopRelated.childNodes.filter(node => node.tagName === 'UL').length > 0) {
-                    return Array.from(loopRelated.childNodes.filter(node => node.tagName === 'UL')[0].childNodes)
+                if (Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL').length > 0) {
+                    return Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
+                        .filter(node => node.tagName === 'LI')
+                        .filter(node => !node.innerText.includes('Portail'))
+                        .map(node => node.innerText)
+                }
+                if (Array.from(loopRelated.childNodes).filter(node => node.className.includes("colonnes")).length > 0) {
+                    return Array.from(Array.from(loopRelated.childNodes).filter(node => node.className.includes("colonnes"))[0].firstChild.childNodes)
                         .filter(node => node.tagName === 'LI')
                         .filter(node => !node.innerText.includes('Portail'))
                         .map(node => node.innerText)
