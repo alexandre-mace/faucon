@@ -49,7 +49,6 @@ const getWikipediaDescription = (request) => {
     if (potentialParagraph.innerText.includes('de navigation')) {
         potentialParagraph = secondTitle[1]
     }
-    console.log(potentialParagraph)
     let i;
     for (i = 0; i < 8; i++) {
         if (potentialParagraph && potentialParagraph.tagName === 'P') {
@@ -60,14 +59,9 @@ const getWikipediaDescription = (request) => {
             descriptionParagraphs = descriptionParagraphs.map(node => node.innerText).reverse()
             return descriptionParagraphs
         }
-        console.log(potentialParagraph)
-        console.log(potentialParagraph.previousSibling)
-        console.log(potentialParagraph.tagName)
         if (mediaQuery1.matches && potentialParagraph.previousElementSibling && potentialParagraph.previousElementSibling.tagName === 'SECTION') {
             let mobilePotentialParagraph = potentialParagraph.previousElementSibling.lastChild
             for (i = 0; i < 5; i++) {
-                console.log(mobilePotentialParagraph)
-                console.log(mobilePotentialParagraph.tagName)
                 if (mobilePotentialParagraph && mobilePotentialParagraph.tagName === 'P') {
                     return Array.from(mobilePotentialParagraph.parentNode.childNodes)
                         .filter(node => node.tagName === 'P')
@@ -107,7 +101,8 @@ const getWikipediaRelated = (request) => {
                     .filter(node => !node.innerText.includes('Portail'))
                     .map(node => node.innerText)
             }
-            if (mediaQuery1.matches && loopRelated.tagName === "SECTION") {
+            if (mediaQuery1.matches && loopRelated.tagName === "SECTION" && Array.from(loopRelated.childNodes).length > 0) {
+                console.log(loopRelated)
                 if (Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL').length > 0) {
                     return Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
                         .filter(node => node.tagName === 'LI')
