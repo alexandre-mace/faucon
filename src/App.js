@@ -20,6 +20,7 @@ function App() {
     const [definitions] = useState(data);
     const [loading, setLoading] = useState(false);
     const [needsNewDefinition, setNeedsNewDefinition] = useState(true);
+    const [seenRelated, setSeenRelated] = useState([]);
     const [needsNewRelatedDefinition, setNeedsNewRelatedDefinition] = useState({
         status: false
     });
@@ -37,18 +38,23 @@ function App() {
                 ? definitions
                 : definitions.filter(definition => definition !== currentDefinition.title)
 
+            setCurrentDefinition(null)
             setLoading(true)
             delayedCloseLoader()
-            getDefinition(potentialNewDefinitions.random(), setCurrentDefinition)
+            const localPoolRandomSubject = potentialNewDefinitions.random()
+            getDefinition(localPoolRandomSubject, setCurrentDefinition)
+            setSeenRelated(seenRelated.concat([localPoolRandomSubject]))
             setNeedsNewDefinition(false)
         }
     }, [needsNewDefinition, definitions]);
 
     useEffect(() => {
         if (needsNewRelatedDefinition.status) {
+            setCurrentDefinition(null)
             setLoading(true)
             delayedCloseLoader()
             getDefinition(needsNewRelatedDefinition.related, setCurrentDefinition)
+            setSeenRelated(seenRelated.concat([needsNewRelatedDefinition.related]))
             setNeedsNewRelatedDefinition({
                 status: false
             })
@@ -69,12 +75,12 @@ function App() {
                 <p id="subtitle">S'informer sur la désinformation</p>
             </header>
             <main className={!currentDefinition ? 'main-min' : "main"}>
-                {(needsNewDefinition || needsNewRelatedDefinition.status || loading) &&
+                {(needsNewDefinition || needsNewRelatedDefinition.status || loading || currentDefinition === null) &&
                     <div className={"loader"}>
                         <Typing>Faucon</Typing>
                     </div>
                 }
-                {(currentDefinition && !loading) &&
+                {(currentDefinition && !(needsNewDefinition || needsNewRelatedDefinition.status || loading)) &&
                     <>
                         <div>
                             <div className={"definition-title"}>{currentDefinition.title}</div>
@@ -88,7 +94,7 @@ function App() {
                                 </div>
                             ))}
                             <div className={"related-wrapper"}>
-                            {currentDefinition.relateds.map((related, index) => (
+                            {currentDefinition.relateds.slice(0,10).filter(related => !seenRelated.includes(related)).map((related, index) => (
                                 <div key={index} style={{fontSize: Math.random() * relatedRatio + 1 + "rem", transform: "translateY(" + -Math.random() * relatedTranslateRatio + "px)"}} className={"definition-related"} onClick={() => {
                                     setCount(count + 1)
                                     setNeedsNewRelatedDefinition({
