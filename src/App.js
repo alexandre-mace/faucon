@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import data from './domain/definitions.json';
 import getDefinition from "./application/query/getDefinition";
 import Typing from "react-typing-animation";
+import wikipediaParagraphFormatter from "./infrastructure/formatter/wikipediaParagraphFormatter";
 
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 
@@ -83,7 +84,7 @@ function App() {
                             </div>
                             {currentDefinition.description.map((description, index) => (
                                 <div key={index} className={"definition-content"}>
-                                    {description}
+                                    {wikipediaParagraphFormatter(description)}
                                 </div>
                             ))}
                             <div className={"related-wrapper"}>
