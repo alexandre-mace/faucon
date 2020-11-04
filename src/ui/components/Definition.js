@@ -3,6 +3,7 @@ import wikipediaParagraphFormatter from "../../infrastructure/formatter/wikipedi
 import data from "../../domain/definitions.json";
 import getDefinition from "../../application/query/getDefinition";
 import delayedCloseLoader from "../../infrastructure/utils/delayedCloseLoader";
+import wikipediaUrlFormatter from "../../infrastructure/formatter/wikipediaUrlFormatter";
 
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 const relatedRatio = mediaQuery1.matches ? 1 : 1;
@@ -81,7 +82,7 @@ const Definition = ({ count, setCount, loading, setLoading }) => {
                     <div className={"definition-title"}>{currentDefinition.title}</div>
                     <div className={"definition-source"}>
                         <a target="_blank" rel="noreferrer"
-                           href={currentDefinition.sourceUrl}>{currentDefinition.sourceName}</a>
+                           href={wikipediaUrlFormatter(currentDefinition.title)}>Source</a>
                     </div>
                     {currentDefinition.description.map((description, index) => (
                         <div key={index} className={"definition-content"}>

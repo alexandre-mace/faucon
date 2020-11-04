@@ -17,6 +17,19 @@ header {
     right: 0;
     font-size: 1.8rem;
 }
+.information img {
+    max-height: 25px;
+    transform: translateY(2px);
+}
+.mt-1 {
+    margin-top: 1rem;
+}
+.information {
+    margin-left: 7px;
+}
+.information img:hover {
+    cursor: pointer;
+}
 .count span {
     font-weight: 900;
 }
@@ -86,7 +99,7 @@ main {
     font-weight: 500;
     font-size: 1.4rem;
     color: #3D3E3E;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 .definition-content {
     font-family: 'Rubik', sans-serif;

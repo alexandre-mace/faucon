@@ -1,7 +1,9 @@
+import wikipediaUrlFormatter from "../formatter/wikipediaUrlFormatter";
+
 const getWikipediaDefinition = (word, setter) => {
     let request = new XMLHttpRequest();
     // eslint-disable-next-line no-useless-concat
-    request.open("GET", "https://eerie-alien-18238.herokuapp.com/" + "https://fr.wikipedia.org/wiki/" + word.replaceAll(' ', '_'), true);  // last parameter must be true
+    request.open("GET", "https://eerie-alien-18238.herokuapp.com/" + wikipediaUrlFormatter(word), true);  // last parameter must be true
     request.responseType = "document";
     request.onload = function (e) {
         if (request.readyState === 4) {
