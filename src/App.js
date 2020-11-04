@@ -29,7 +29,7 @@ function App() {
     const delayedCloseLoader = () => {
         setTimeout(() => {
             setLoading(false)
-        }, 550);
+        }, 3550);
     }
 
     useEffect(() => {
@@ -78,10 +78,17 @@ function App() {
                 {(needsNewDefinition || needsNewRelatedDefinition.status || loading || currentDefinition === null) &&
                     <div className={"loader"}>
                         <Typing>Faucon</Typing>
+                        <Typing.Delay ms={1000} />
+                        <Typing.Backspace count={6} />
                     </div>
                 }
                 {(currentDefinition && !(needsNewDefinition || needsNewRelatedDefinition.status || loading)) &&
                     <>
+                        {currentDefinition.hasSevereWarning &&
+                            <div className={"definition-warning"}>
+                                <span role="img" aria-label="warning">⚠️️</span> Attention, la définition est issue d'un article qui comporte un risque sur la véracité des informations exposées.
+                            </div>
+                        }
                         <div>
                             <div className={"definition-title"}>{currentDefinition.title}</div>
                             <div className={"definition-source"}>
@@ -108,7 +115,9 @@ function App() {
                             </div>
                         </div>
                         <button className={"action-button"} onClick={() => {
-                            setCount(count + 1)
+                            if (currentDefinition.title !== 'Page non atteignable') {
+                                setCount(count + 1)
+                            }
                             setNeedsNewDefinition(true)
                         }}>Compris</button>
                     </>

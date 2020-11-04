@@ -10,11 +10,13 @@ const getWikipediaDefinition = (word, setter) => {
                     const title = getWikipediaTitle(request)
                     const descriptionParagraphs = getWikipediaDescription(request)
                     const relateds = getWikipediaRelated(request)
+                    const hasSevereWarning = getHasSevereWarning(request)
 
                     setter({
                         title: title,
                         description: descriptionParagraphs,
-                        relateds: relateds
+                        relateds: relateds,
+                        hasSevereWarning: hasSevereWarning
                     })
                     return;
                 }
@@ -24,7 +26,8 @@ const getWikipediaDefinition = (word, setter) => {
                 setter({
                     title: 'Page non atteignable',
                     description: ["Désolé, Faucon n'a pas pu trouver la page."],
-                    relateds: []
+                    relateds: [],
+                    hasSevereWarning: false
                 })
                 return;
             }
@@ -38,6 +41,10 @@ const getWikipediaDefinition = (word, setter) => {
 
 const getWikipediaTitle = (request) => {
     return request.responseXML.querySelectorAll("h1")[0].innerText;
+}
+
+const getHasSevereWarning = (request) => {
+    return request.responseXML.querySelectorAll(".bandeau-niveau-grave").length > 0;
 }
 
 const getWikipediaDescription = (request) => {

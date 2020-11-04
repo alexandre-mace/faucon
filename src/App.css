@@ -93,6 +93,16 @@ main {
     line-height: 2;
     font-size: 1.3rem;
 }
+.definition-warning {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-family: 'Rubik', sans-serif;
+}
+.definition-warning span {
+    margin-right: 0.5rem;
+    font-size: 1.4rem;
+}
 .action-button {
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 900;
