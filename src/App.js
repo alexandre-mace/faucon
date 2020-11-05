@@ -22,7 +22,7 @@ function App() {
                 <div className={"count"}><span>{count}</span> sujets étudiés. <span className={"information"}><img onClick={() => setInformationMode(true)} src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/60/facebook/230/information-source_2139.png" alt=""/></span></div>
                 <p id="subtitle">S'informer sur la désinformation</p>
             </header>
-            {loading &&
+            {(loading && !informationMode) &&
                 <Loader/>
             }
             {!informationMode &&
