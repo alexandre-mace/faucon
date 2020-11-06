@@ -96,31 +96,23 @@ const getWikipediaRelated = (request) => {
         for (i = 0; i < 8; i++) {
             if (loopRelated && loopRelated.className && loopRelated.className.includes("colonnes")) {
                 if (loopRelated.childNodes[1] && loopRelated.childNodes[1].tagName === 'UL') {
-                    return Array.from(loopRelated.childNodes[1].childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .filter(node => !node.innerText.includes('Portail'))
-                        .map(node => node.innerText)
+                    const relateds = Array.from(loopRelated.childNodes[1].childNodes)
+                    return formatWikipediaRelated(relateds);
                 }
             }
             if (loopRelated && loopRelated.tagName === 'UL') {
-                return Array.from(loopRelated.childNodes)
-                    .filter(node => node.tagName === 'LI')
-                    .filter(node => !node.innerText.includes('Portail'))
-                    .map(node => node.innerText)
+                const relateds = Array.from(loopRelated.childNodes)
+                return formatWikipediaRelated(relateds);
             }
             if (loopRelated.tagName === "SECTION" && Array.from(loopRelated.childNodes).length > 0) {
                 if (Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL').length > 0) {
-                    return Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .filter(node => !node.innerText.includes('Portail'))
-                        .map(node => node.innerText)
+                    const relateds = Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
+                    return formatWikipediaRelated(relateds);
                 }
 
                 if (Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes"))).length > 0) {
-                    return Array.from(Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes")))[0].firstChild.nextSibling.childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .filter(node => !node.innerText.includes('Portail'))
-                        .map(node => node.innerText)
+                    const relateds = Array.from(Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes")))[0].firstChild.nextSibling.childNodes)
+                    return formatWikipediaRelated(relateds);
                 }
             }
             if (loopRelated.nextSibling === null) {
@@ -136,23 +128,17 @@ const getWikipediaRelated = (request) => {
         let loopRelated = relatedSection.parentNode;
         for (i = 0; i < 5; i++) {
             if (loopRelated && loopRelated.tagName === 'UL') {
-                return Array.from(loopRelated.childNodes)
-                    .filter(node => node.tagName === 'LI')
-                    .filter(node => !node.innerText.includes('Portail'))
-                    .map(node => node.innerText)
+                const relateds = Array.from(loopRelated.childNodes)
+                return formatWikipediaRelated(relateds);
             }
             if (loopRelated.tagName === "SECTION" && Array.from(loopRelated.childNodes).length > 0) {
                 if (Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL').length > 0) {
-                    return Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .filter(node => !node.innerText.includes('Portail'))
-                        .map(node => node.innerText)
+                    const relateds = Array.from(Array.from(loopRelated.childNodes).filter(node => node.tagName === 'UL')[0].childNodes)
+                    return formatWikipediaRelated(relateds);
                 }
                 if (Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes"))).length > 0) {
-                    return Array.from(Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes")))[0].firstChild.childNodes)
-                        .filter(node => node.tagName === 'LI')
-                        .filter(node => !node.innerText.includes('Portail'))
-                        .map(node => node.innerText)
+                    const relateds = Array.from(Array.from(loopRelated.childNodes).filter(node => (node.className && node.className.includes("colonnes")))[0].firstChild.childNodes)
+                    return formatWikipediaRelated(relateds);
                 }
             }
             if (loopRelated.nextSibling === null) {
@@ -164,5 +150,15 @@ const getWikipediaRelated = (request) => {
     }
     return [];
 
+}
+const formatWikipediaRelated = (array) => {
+    return array
+        .filter(node => node.tagName === 'LI')
+        .filter(node => !node.innerText.includes('Portail'))
+        .filter(node => node.getElementsByTagName('a').length > 0)
+        .map(node => node.getElementsByTagName('a')[0].getAttribute("href"))
+        .map(node => node.replace('/wiki/', ''))
+        .map(node => decodeURI(node))
+        .map(node => node.replaceAll('_', ' '))
 }
 export default getWikipediaDefinition
