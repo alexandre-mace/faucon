@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import wikipediaParagraphFormatter from "../../infrastructure/formatter/wikipediaParagraphFormatter";
-import data from "../../domain/definitions.json";
-import getDefinition from "../../application/query/getDefinition";
-import delayedCloseLoader from "../../infrastructure/utils/delayedCloseLoader";
-import wikipediaUrlFormatter from "../../infrastructure/formatter/wikipediaUrlFormatter";
+import data from "./../domain/definitions.json";
+import getDefinition from "./../query/getDefinition";
+import delayedCloseLoader from "./../infrastructure/utils/delayedCloseLoader";
+import wikipediaUrlFormatter from "./../infrastructure/formatter/wikipediaUrlFormatter";
+import {useEffect, useState} from "react";
+import wikipediaParagraphFormatter from "../infrastructure/formatter/wikipediaParagraphFormatter.js";
 
 let mediaQuery1 = window.matchMedia("(max-width: 600px)");
 const relatedRatio = mediaQuery1.matches ? 1 : 1;
@@ -23,6 +23,8 @@ const Definition = ({ count, setCount, loading, setLoading }) => {
     });
     const [currentDefinition, setCurrentDefinition] = useState(null);
     const [hasRunningProcess, setHasRunningProcess] = useState(true);
+
+    console.log(currentDefinition)
 
     useEffect(() => {
         if (hasRunningProcess === false) {

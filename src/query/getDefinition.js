@@ -1,4 +1,4 @@
-import getWikipediaDefinition from "../../infrastructure/repository/getWikipediaDefinition";
+import getWikipediaDefinition from "../infrastructure/repository/getWikipediaDefinition.js";
 
 const getDefinition = (word, setter) => {
     return getWikipediaDefinition(word, setter)

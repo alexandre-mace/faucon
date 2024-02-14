@@ -3,9 +3,9 @@ import wikipediaUrlFormatter from "../formatter/wikipediaUrlFormatter";
 const getWikipediaDefinition = (word, setter) => {
     let request = new XMLHttpRequest();
     // eslint-disable-next-line no-useless-concat
-    request.open("GET", "https://corsproxy.io/" + wikipediaUrlFormatter(word), true);  // last parameter must be true
+    request.open("GET", "https://corsproxy.io/?" + wikipediaUrlFormatter(word), true);  // last parameter must be true
     request.responseType = "document";
-    request.onload = function (e) {
+    request.onload = function () {
         if (request.readyState === 4) {
             if (request.status === 200) {
                 if (typeof setter !== 'undefined') {
@@ -31,11 +31,11 @@ const getWikipediaDefinition = (word, setter) => {
                     relateds: [],
                     hasSevereWarning: false
                 })
-                return;
+
             }
         }
     };
-    request.onerror = function (e) {
+    request.onerror = function () {
         console.error(request.status, request.statusText);
     };
     request.send(null);  // no
@@ -50,13 +50,10 @@ const getHasSevereWarning = (request) => {
 }
 
 const getWikipediaDescription = (request) => {
-    const secondTitle = request.responseXML.querySelectorAll("h2:not(#mw-toc-heading)");
+    let potentialParagraph = request.responseXML.querySelector(".mw-content-ltr > p");
     let descriptionParagraphs = [];
-    let potentialParagraph = secondTitle[0];
-    if (potentialParagraph.innerText.includes('de navigation')) {
-        potentialParagraph = secondTitle[1]
-    }
     let i;
+    console.log(potentialParagraph)
     for (i = 0; i < 8; i++) {
         if (potentialParagraph && potentialParagraph.tagName === 'P') {
             while (potentialParagraph !== null && potentialParagraph.tagName === 'P') {
